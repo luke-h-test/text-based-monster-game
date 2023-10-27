@@ -39,15 +39,19 @@ public class Player
         this.score = score;
     }
 
-    public void generateStartPos(Grid grid)
+    public int[] generateStartPos(Grid grid)
     {
         int maxX = grid.getMaxX();
         int maxY = grid.getMaxY();
-        int randomX = ThreadLocalRandom.current().nextInt(1, maxX + 1);
-        int randomY = ThreadLocalRandom.current().nextInt(1, maxY + 1);
+        int randomX = ThreadLocalRandom.current().nextInt(0, maxX);
+        int randomY = ThreadLocalRandom.current().nextInt(0, maxY);
 
         this.xPos = randomX;
         this.yPos = randomY;
+
+        int[] playerLoc = {randomX, randomY};
+
+        return playerLoc;
 
     }
 }

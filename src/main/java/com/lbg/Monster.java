@@ -1,5 +1,7 @@
 package com.lbg;
 
+import java.util.concurrent.ThreadLocalRandom;
+
 public class Monster
 {
     private int xPos;
@@ -7,14 +9,6 @@ public class Monster
     private String greeting;
 
     private int movement;
-
-
-    public Monster(int xPos, int yPos, String greeting, int movement) {
-        this.xPos = xPos;
-        this.yPos = yPos;
-        this.greeting = greeting;
-        this.movement = movement;
-    }
 
     public int getxPos() {
         return xPos;
@@ -46,5 +40,22 @@ public class Monster
 
     public void setMovement(int movement) {
         this.movement = movement;
+    }
+
+    public int[] generateStartPos(Grid grid) {
+        int randomX;
+        int randomY;
+        do {
+            int maxX = grid.getMaxX();
+            int maxY = grid.getMaxY();
+            randomX = ThreadLocalRandom.current().nextInt(0, maxX);
+            randomY = ThreadLocalRandom.current().nextInt(0, maxY);
+        } while (grid.getGridStatus()[randomX][randomY] != 0);
+
+        this.xPos = randomX;
+        this.yPos = randomY;
+
+        int[] monsterLoc = {randomX, randomY};
+        return monsterLoc;
     }
 }
